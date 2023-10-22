@@ -66,7 +66,7 @@ resource "aws_network_interface_sg_attachment" "k8worker" {
 resource "aws_instance" "jenkins" {
   ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.medium"
-  key_name      = "lab-key"
+  key_name      = "newkey"
 
 
   network_interface {
@@ -87,7 +87,7 @@ resource "aws_instance" "jenkins" {
 resource "aws_instance" "k8master" {
   ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.medium"
-  key_name      = "lab-key"
+  key_name      = "newkey"
 
   network_interface {
     network_interface_id = aws_network_interface.k8master.id
@@ -114,7 +114,7 @@ resource "aws_instance" "k8worker" {
   count         = 2
   ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.micro"
-  key_name      = "lab-key"
+  key_name      = "newkey"
 
   network_interface {
     network_interface_id = aws_network_interface.k8worker[count.index].id
