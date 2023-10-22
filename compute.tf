@@ -134,18 +134,3 @@ resource "aws_instance" "k8worker" {
   }
 }
 
-# query eni for k8worker nodes to get private ip
-data "aws_network_interface" "k8worker" {
-  count = 2
-  id    = aws_network_interface.k8worker[count.index].id
-}
-
-# query eni for k8master to get private ip
-data "aws_network_interface" "k8master" {
-  id = aws_network_interface.k8master.id
-}
-
-# query eni for jenkis to get private ip
-data "aws_network_interface" "jenkins" {
-  id = aws_network_interface.jenkins.id
-}
