@@ -2,7 +2,7 @@
 # eni for jenkins ec2
 
 resource "aws_network_interface" "jenkins" {
-  subnet_id = aws_subnet.priv_subnet.id
+  subnet_id = aws_subnet.pub_subnet.id
 
   tags = {
     Name = "${var.Env}_jen_agent"
@@ -22,7 +22,7 @@ resource "aws_network_interface_sg_attachment" "jenkins" {
 # eni for k8master ec2
 
 resource "aws_network_interface" "k8master" {
-  subnet_id = aws_subnet.priv_subnet.id
+  subnet_id = aws_subnet.pub_subnet.id
 
   tags = {
     Name = "${var.Env}_k8master"
@@ -43,7 +43,7 @@ resource "aws_network_interface_sg_attachment" "k8master" {
 
 resource "aws_network_interface" "k8worker" {
   count     = 2
-  subnet_id = aws_subnet.priv_subnet.id
+  subnet_id = aws_subnet.pub_subnet.id
 
   tags = {
     Name = "${var.Env}_k8worker${count.index + 1}"
