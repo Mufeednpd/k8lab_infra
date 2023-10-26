@@ -67,7 +67,7 @@ resource "aws_instance" "jenkins" {
   ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.medium"
   key_name      = "newkey"
-
+  associate_public_ip_address = "true"
 
   network_interface {
     network_interface_id = aws_network_interface.jenkins.id
@@ -88,6 +88,7 @@ resource "aws_instance" "k8master" {
   ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.medium"
   key_name      = "newkey"
+  associate_public_ip_address = "true"
 
   network_interface {
     network_interface_id = aws_network_interface.k8master.id
@@ -115,6 +116,7 @@ resource "aws_instance" "k8worker" {
   ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.micro"
   key_name      = "newkey"
+  associate_public_ip_address = "true"
 
   network_interface {
     network_interface_id = aws_network_interface.k8worker[count.index].id
