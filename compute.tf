@@ -69,10 +69,7 @@ resource "aws_instance" "jenkins" {
   key_name      = "newkey"
   associate_public_ip_address = "true"
 
-  network_interface {
-    network_interface_id = aws_network_interface.jenkins.id
-    device_index         = 0
-  }
+ subnet_id = aws_subnet.pub_subnet.id
 
   tags = {
     Name = "${var.Env}_jen_agent"
@@ -90,10 +87,7 @@ resource "aws_instance" "k8master" {
   key_name      = "newkey"
   associate_public_ip_address = "true"
 
-  network_interface {
-    network_interface_id = aws_network_interface.k8master.id
-    device_index         = 0
-  }
+  subnet_id = aws_subnet.pub_subnet.id
 
   root_block_device {
     volume_type           = "gp2"
@@ -118,10 +112,7 @@ resource "aws_instance" "k8worker" {
   key_name      = "newkey"
   associate_public_ip_address = "true"
 
-  network_interface {
-    network_interface_id = aws_network_interface.k8worker[count.index].id
-    device_index         = 0
-  }
+ subnet_id = aws_subnet.pub_subnet.id
 
   root_block_device {
     volume_type           = "gp2"
