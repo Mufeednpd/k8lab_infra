@@ -137,15 +137,15 @@ resource "aws_instance" "k8worker" {
 # query eni for k8worker nodes to get private ip
 data "aws_instance" "k8worker" {
   count = 2
-  id    = aws_instance.k8worker[count.index].id
+  instance_id    = aws_instance.k8worker[count.index].id
 }
 
 # query eni for k8master to get private ip
 data "aws_instance" "k8master" {
-  id = aws_instance.k8master.id
+  instance_id = aws_instance.k8master.id
 }
 
 # query eni for jenkis to get private ip
 data "aws_instance" "jenkins" {
-  id = aws_instance.jenkins.id
+ instance_id = aws_instance.jenkins.id
 }
