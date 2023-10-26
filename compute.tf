@@ -1,22 +1,5 @@
 
-# eni for jenkins ec2
 
-resource "aws_network_interface" "jenkins" {
-  subnet_id = aws_subnet.pub_subnet.id
-
-  tags = {
-    Name = "${var.Env}_jen_agent"
-    Env  = var.Env
-    Role = "jenkins"
-  }
-}
-
-# security group attachment for jenkins eni
-
-resource "aws_network_interface_sg_attachment" "jenkins" {
-  security_group_id    = aws_security_group.management.id
-  network_interface_id = aws_network_interface.jenkins.id
-}
 
 
 # eni for k8master ec2
@@ -68,6 +51,7 @@ resource "aws_instance" "jenkins" {
   instance_type = "t2.medium"
   key_name      = "newkey"
   associate_public_ip_address = "true"
+  vpc_security_group_ids = [
 
  subnet_id = aws_subnet.pub_subnet.id
 
@@ -86,6 +70,7 @@ resource "aws_instance" "k8master" {
   instance_type = "t2.medium"
   key_name      = "newkey"
   associate_public_ip_address = "true"
+  vpc_security_group_ids
 
   subnet_id = aws_subnet.pub_subnet.id
 
