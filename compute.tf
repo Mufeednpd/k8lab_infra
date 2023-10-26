@@ -51,7 +51,7 @@ resource "aws_instance" "jenkins" {
   instance_type = "t2.medium"
   key_name      = "newkey"
   associate_public_ip_address = "true"
-  vpc_security_group_ids = [
+  vpc_security_group_ids = [aws_security_group.management.id]
 
  subnet_id = aws_subnet.pub_subnet.id
 
@@ -70,7 +70,7 @@ resource "aws_instance" "k8master" {
   instance_type = "t2.medium"
   key_name      = "newkey"
   associate_public_ip_address = "true"
-  vpc_security_group_ids
+  vpc_security_group_ids = [aws_security_group.management.id]
 
   subnet_id = aws_subnet.pub_subnet.id
 
@@ -96,6 +96,7 @@ resource "aws_instance" "k8worker" {
   instance_type = "t2.micro"
   key_name      = "newkey"
   associate_public_ip_address = "true"
+  vpc_security_group_ids = [aws_security_group.management.id]
 
  subnet_id = aws_subnet.pub_subnet.id
 
@@ -123,7 +124,7 @@ data "aws_instance" "k8master" {
   instance_id = aws_instance.k8master.id
 }
 
-# query eni for jenkis to get private ip
+# query eni for jenkins to get private ip
 data "aws_instance" "jenkins" {
  instance_id = aws_instance.jenkins.id
 }
