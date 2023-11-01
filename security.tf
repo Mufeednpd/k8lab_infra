@@ -24,3 +24,23 @@ egress {
   }
 }
 
+
+resource "aws_security_group" "k8cluster" {
+  name        = "k8cluster_sg"
+  description = "Allow inbound k8 traffic"
+  vpc_id      = aws_vpc.vpc.id
+
+  ingress {
+    description = "Allow 10250"
+    from_port   = 0
+    to_port     = 65564
+    protocol    = "tcp"
+    self = "true"
+  }
+
+
+  tags = {
+    Name = "Allow inbound  k8 traffic"
+  }
+
+}
