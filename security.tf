@@ -33,7 +33,7 @@ resource "aws_security_group" "k8cluster" {
   ingress {
     description = "Allow 10250"
     from_port   = 0
-    to_port     = 65564
+    to_port     = 65534
     protocol    = "tcp"
     self = "true"
   }
