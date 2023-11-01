@@ -27,7 +27,7 @@ resource "aws_instance" "k8master" {
   instance_type = "t2.medium"
   key_name      = "newkey"
   associate_public_ip_address = "true"
-  vpc_security_group_ids = [aws_security_group.management.id]
+  vpc_security_group_ids = [aws_security_group.management.id,aws_security_group.k8cluster.id]
 
   subnet_id = aws_subnet.pub_subnet.id
 
@@ -53,8 +53,7 @@ resource "aws_instance" "k8worker" {
   instance_type = "t2.micro"
   key_name      = "newkey"
   associate_public_ip_address = "true"
-  vpc_security_group_ids = [aws_security_group.management.id]
-
+  vpc_security_group_ids = [aws_security_group.management.id,aws_security_group.k8cluster.id]
  subnet_id = aws_subnet.pub_subnet.id
 
   root_block_device {
