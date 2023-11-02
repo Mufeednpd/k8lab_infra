@@ -86,3 +86,8 @@ resource "aws_route_table_association" "public" {
 
 # add route to route table in management (jenkins) vpc
 
+resource "aws_route" "route" {
+  route_table_id            = "rtb-0b1a2977fe7ad5e1d"
+  destination_cidr_block    = "172.16.1.0/25"
+  vpc_peering_connection_id = aws_vpc_peering_connection.peering.id
+}
