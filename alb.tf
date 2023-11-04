@@ -1,5 +1,5 @@
 #target group
-resource "asw_lb_target_group" "worker_target_group" {
+resource "aws_lb_target_group" "worker_target_group" {
     health_check {
        interval  = 10
        path      = "/"
