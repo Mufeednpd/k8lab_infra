@@ -22,6 +22,14 @@ resource "aws_lb" "application-lb" {
     internal   = False
     ip_address_type = "ipv4"
     load_balancer_type  = "application"
-    subnets  = aws_vpc.vpc.id
+    subnets  = aws_subnet.pub_subnet.id
+
+    tags = {
+        Name = "app-lb"
+    }
+}
+
+resource "aws_lb_listener" "alb-listener" {
+    load_balancer_arn
     
 
