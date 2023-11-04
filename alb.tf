@@ -9,27 +9,34 @@ resource "asw_lb_target_group" "target-group" {
        unhealthy_threshold = 2
     }
 
-     name  = "app-tg"
-     port  = 80
+     name  = "worker-tg"
+     port  = 30259
      protocol = "HTTP"
      target_type  = "instance"
      vpc_id  = aws_vpc.vpc.id
 }
 
 #Creating ALB
-resource "aws_lb" "application-lb" {
+resource "aws_lb" "application_alb" {
     name  = "app-alb"
     internal   = False
     ip_address_type = "ipv4"
     load_balancer_type  = "application"
     subnets  = aws_subnet.pub_subnet.id
-
-    tags = {
-        Name = "app-lb"
-    }
 }
 
-resource "aws_lb_listener" "alb-listener" {
-    load_balancer_arn
+resource "aws_lb_listener" "application_alb_listener" {
+  load_balancer_arn = aws_lb.application_alb.arn
+  port              = 80
+  protocol          = "HTTP"
+  default_action {
+    type             = "fixed-response"
+    fixed_response {
+      content_type = "text/plain"
+      status_code  = "200"
+      message_body = "OK"
+    }
+  }
+}
     
 
