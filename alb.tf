@@ -22,7 +22,7 @@ resource "aws_lb" "application_alb" {
     internal   = false
     ip_address_type = "ipv4"
     load_balancer_type  = "application"
-    subnet_id      = aws_subnet.pub_subnet.id
+    subnets      = ["pub_subnet", pub_subnet2"]
 }
 
 resource "aws_lb_listener" "application_alb_listener" {
