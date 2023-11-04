@@ -1,5 +1,5 @@
 #target group
-resource "asw_lb_target_group" "target-group" {
+resource "asw_lb_target_group" "worker_target_group" {
     health_check {
        interval  = 10
        path      = "/"
@@ -9,7 +9,7 @@ resource "asw_lb_target_group" "target-group" {
        unhealthy_threshold = 2
     }
 
-     name  = "worker-tg"
+     name  = "worker-target-group"
      port  = 30259
      protocol = "HTTP"
      target_type  = "instance"
@@ -39,4 +39,16 @@ resource "aws_lb_listener" "application_alb_listener" {
   }
 }
     
+resource "aws_lb_listener_rule" "app_listener_rule" {
+  listener_arn = aws_lb_listener.application_alb_listener.arn
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.worker_target_group.arn
+  }
 
+  condition {
+    path_pattern {
+      values = ["/"]
+    }
+  }
+}
