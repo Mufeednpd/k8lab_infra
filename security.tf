@@ -44,3 +44,12 @@ resource "aws_security_group" "k8cluster" {
   }
 
 }
+
+resource "aws_security_group" "alb_sg" {
+  name        = "alb-security-group"
+  description = "Security group for the Application Load Balancer"
+  vpc_id      = aws_vpc.vpc.id
+
+  // Define inbound and outbound rules for your security group if needed
+}
+
