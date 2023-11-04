@@ -19,7 +19,7 @@ resource "aws_lb_target_group" "worker_target_group" {
 #Creating ALB
 resource "aws_lb" "application_alb" {
     name  = "app-alb"
-    internal   = False
+    internal   = false
     ip_address_type = "ipv4"
     load_balancer_type  = "application"
     subnets  = aws_subnet.pub_subnet.id
