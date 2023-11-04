@@ -1,3 +1,4 @@
+#target group
 resource "asw_lb_target_group" "target-group" {
     health_check {
        interval  = 10
@@ -12,4 +13,15 @@ resource "asw_lb_target_group" "target-group" {
      port  = 80
      protocol = "HTTP"
      target_type  = "instance"
-     vpc_id  = 
+     vpc_id  = aws_vpc.vpc.id
+}
+
+#Creating ALB
+resource "aws_lb" "application-lb" {
+    name  = "app-alb"
+    internal   = False
+    ip_address_type = "ipv4"
+    load_balancer_type  = "application"
+    subnets  = aws_vpc.vpc.id
+    
+
