@@ -1,7 +1,7 @@
 
 # create alb target group for k8workers
 
- resource "aws_lb_target_group" "k8workers" {
+ resource "aws_lb_target_group" "k8workers01" {
    name     = "k8workers"
    port     = 30259
    protocol = "HTTP"
@@ -30,7 +30,7 @@
 
  resource "aws_lb_target_group_attachment" "k8workers_az_a" {
    count = 1
-   target_group_arn = aws_lb_target_group.k8workers.arn
+   target_group_arn = aws_lb_target_group.k8workers01.arn
    target_id        = aws_instance.k8workers_az_a[count.index].id
    port             = 30259
  }
@@ -42,7 +42,7 @@
 
  resource "aws_lb_target_group_attachment" "k8workers_az_b" {
    count = 1
-   target_group_arn = aws_lb_target_group.k8workers.arn
+   target_group_arn = aws_lb_target_group.k8workers01.arn
    target_id        = aws_instance.k8workers_az_b[count.index].id
    port             = 30259
  }
@@ -58,6 +58,6 @@ resource "aws_lb_listener" "front_end" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.k8workers.arn
+    target_group_arn = aws_lb_target_group.k8workers01.arn
   }
 }

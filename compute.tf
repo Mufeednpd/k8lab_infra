@@ -53,7 +53,6 @@ resource "aws_instance" "k8workers_az_a" {
   ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.micro"
   key_name      = "newkey"
-  iam_instance_profile = "k8_instance_profile"
   associate_public_ip_address = "true"
   vpc_security_group_ids = [aws_security_group.management.id,aws_security_group.k8cluster.id]
  subnet_id = aws_subnet.pub_subnet.id
@@ -81,7 +80,6 @@ resource "aws_instance" "k8workers_az_b" {
   ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.micro"
   key_name      = "newkey"
-  iam_instance_profile = "k8_instance_profile"
   associate_public_ip_address = "true"
   vpc_security_group_ids = [aws_security_group.management.id,aws_security_group.k8cluster.id]
  subnet_id = aws_subnet.pub_subnet.id
