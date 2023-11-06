@@ -48,16 +48,16 @@
  }
 
 
-# # creat listener for k8 workers
+# creat listener for k8 workers
 
-# resource "aws_lb_listener" "front_end" {
-#   load_balancer_arn = aws_lb.alb.arn
-#   port              = "443"
-#   protocol          = "HTTPS"
-#   certificate_arn   = "arn:aws:acm:us-east-1:278004647125:certificate/dc2f58c4-bbd0-4eab-8a46-cc60901bb169"
+resource "aws_lb_listener" "front_end" {
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  certificate_arn   = "arn:aws:acm:us-east-1:118091114135:certificate/8119987b-73c3-4bc4-90c1-57f03d6a7e95"
 
-#   default_action {
-#     type             = "forward"
-#     target_group_arn = aws_lb_target_group.k8workers.arn
-#   }
-# }
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.k8workers.arn
+  }
+}
