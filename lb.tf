@@ -1,27 +1,27 @@
 
-# # create alb target group for k8workers
+# create alb target group for k8workers
 
-#  resource "aws_lb_target_group" "k8workers01" {
-#    name     = "k8workers"
-#    port     = 30259
-#    protocol = "HTTP"
-#    vpc_id   = aws_vpc.vpc.id
-#    target_type = "instance"
+ resource "aws_lb_target_group" "k8workers" {
+   name     = "k8workers"
+   port     = 30259
+   protocol = "HTTP"
+   vpc_id   = aws_vpc.vpc.id
+   target_type = "instance"
   
-#  }
+ }
 
 
-#  resource "aws_lb" "alb" {
-#    name               = "weblb"
-#    internal           = false
-#    load_balancer_type = "application"
-#    security_groups    = [aws_security_group.alb.id]
-#    subnets            = [aws_subnet.pub_subnet.id,aws_subnet.pub_subnet2.id]
+ resource "aws_lb" "alb" {
+   name               = "weblb"
+   internal           = false
+   load_balancer_type = "application"
+   security_groups    = [aws_security_group.alb.id]
+   subnets            = [aws_subnet.pub_subnet.id,aws_subnet.pub_subnet2.id]
 
-#    tags = {
-#      Environment = "dev"
-#    }
-#  }
+   tags = {
+     Environment = "dev"
+   }
+ }
 
 
  # attach  k8 worker nodes in AZ a
