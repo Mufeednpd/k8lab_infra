@@ -4,8 +4,11 @@ k8master ansible_host=${ip} ansible_user=ubuntu
 %{ endfor ~}
 
 [workers]
-%{ for index, ip in workernode_ip ~}
+%{ for index, ip in workernode_az_a_ip ~}
 ${hostname}${index+1} ansible_host=${ip} ansible_user=ubuntu
+%{ endfor ~}
+%{ for index, ip in workernode_az_b_ip ~}
+${hostname}${index+2} ansible_host=${ip} ansible_user=ubuntu
 %{ endfor ~}
 
 [jenkins]
