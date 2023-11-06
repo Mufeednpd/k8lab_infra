@@ -26,8 +26,8 @@ resource "aws_security_group" "k8cluster" {
 
   ingress {
     description = "nginx from alb"
-    from_port   = 31975
-    to_port     = 31975
+    from_port   = 30259
+    to_port     = 30259
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -72,8 +72,8 @@ resource "aws_security_group" "alb" {
 
   }
   egress {
-    from_port        = 31975
-    to_port          = 31975
+    from_port        = 30259
+    to_port          = 30259
     protocol         = "tcp"
     security_groups      = [aws_security_group.k8cluster.id]
   }
