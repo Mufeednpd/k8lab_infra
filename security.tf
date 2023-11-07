@@ -47,6 +47,13 @@ resource "aws_security_group" "k8cluster" {
     cidr_blocks = ["172.16.0.0/24"]
   }
 
+ingress {
+    description = "intercluster communication"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    self = "true"
+  }
 
   tags = {
     Name = "Allow inbound  web traffic"
