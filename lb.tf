@@ -2,7 +2,7 @@
 # create alb target group for k8workers
 
  resource "aws_lb_target_group" "k8workers" {
-   name     = "k8workers"
+   name     = "k8workers01"
    port     = 30259
    protocol = "HTTP"
    vpc_id   = aws_vpc.vpc.id
